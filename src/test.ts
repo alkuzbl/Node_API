@@ -6,12 +6,16 @@ function Component(id: number) {
     }
 }
 
+
+
 function Logger() {
     console.log('init logger')
     return (target: Function) => {
         console.log('run logger')
     }
 }
+
+
 
 function Method(
     target: Object,
@@ -24,6 +28,8 @@ function Method(
     }
 }
 
+
+
 function Param(
     target: Object,
     propertyKey: string,
@@ -32,6 +38,8 @@ function Param(
     console.log(propertyKey, index)
 
 }
+
+
 
 function Prop(
     target: Object,
@@ -56,6 +64,8 @@ function Prop(
     })
 
 }
+
+
 
 @Logger()
 @Component(1)
