@@ -4,16 +4,15 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
 import 'reflect-metadata';
-import { IUsersController } from '../users/users.controller.interface';
-import { UserLoginDto } from '../users/dto/user-login.dto';
-import { UserRegisterDto } from '../users/dto/user-register.dto';
+import { IUsersController } from './users.controller.interface';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
 import { HttpError } from '../errors/http-error.class';
 import { ValidateMiddleware } from '../common/validate.middleware';
 import { sign } from 'jsonwebtoken';
-import { IUserService } from '../users/users.service.interface';
+import { IUserService } from './users.service.interface';
 import { IConfigService } from '../config/config.service.interface';
 import { AuthGuard } from '../common/auth.guard';
-import { UserModel } from '@prisma/client';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
