@@ -14,6 +14,12 @@ import { ConfigService } from './config/config.service';
 import { PrismaService } from './db/prisma.service';
 import { IUserRepository } from './users/users.repository.interface';
 import { UsersRepository } from './users/users.repository';
+import { ITodoListsController } from './todolists/todoLists.controller.interface';
+import { TodoListsController } from './todolists/todoLists.controller';
+import { ITodoListsService } from './todolists/todoLists.service.interface';
+import { TodoListsService } from './todolists/todoLists.service';
+import { ITodoListsRepository } from './todolists/todoLists.repository.interface';
+import { TodoListsRepository } from './todolists/todoLists.repository';
 
 export interface IBootstrapReturn {
 	app: App;
@@ -23,11 +29,14 @@ export interface IBootstrapReturn {
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
 	bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
-	bind<IUsersController>(TYPES.UserController).to(UsersController);
-	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
-	bind<IUserService>(TYPES.UserService).to(UsersService);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+	bind<IUsersController>(TYPES.UserController).to(UsersController);
+	bind<IUserService>(TYPES.UserService).to(UsersService);
 	bind<IUserRepository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope();
+	bind<ITodoListsController>(TYPES.TodoListsController).to(TodoListsController);
+	bind<ITodoListsService>(TYPES.TodoListsService).to(TodoListsService);
+	bind<ITodoListsRepository>(TYPES.TodoListsRepository).to(TodoListsRepository);
 	bind<App>(TYPES.Application).to(App);
 });
 

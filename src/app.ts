@@ -11,6 +11,7 @@ import { UsersController } from './users/users.controller';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { PrismaService } from './db/prisma.service';
 import { AuthMiddleware } from './common/auth.middleware';
+import { TodoListsController } from './todolists/todoLists.controller';
 
 @injectable()
 export class App {
@@ -21,12 +22,13 @@ export class App {
 	constructor(
 		@inject(TYPES.ILoggerService) private logger: ILogger,
 		@inject(TYPES.UserController) private userController: UsersController,
+		@inject(TYPES.TodoListsController) private todoListsController: TodoListsController,
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private prismaService: PrismaService,
 	) {
 		this.app = express();
-		this.port = 8000;
+		this.port = Number(this.configService.get('PORT'));
 	}
 
 	useMiddleware(): void {
@@ -37,6 +39,7 @@ export class App {
 
 	useRoutes(): void {
 		this.app.use('/users', this.userController.router);
+		this.app.use('/todolists', this.todoListsController.router);
 	}
 
 	useExceptionFilters(): void {
